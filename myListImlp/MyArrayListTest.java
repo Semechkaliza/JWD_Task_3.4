@@ -1,24 +1,20 @@
-package tests;
+package tests.myListImlp;
 
-import main.linkedList.MyLinkedList;
+import lists.myListImpl.MyArrayList;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
-public class MyLinkedListTest {
+public class MyArrayListTest {
 
-    @Test
+    @org.junit.Test
     public void constructor() throws Exception {
 
-        List<Object> expect = new LinkedList<>();
+        List<Object> expect = new ArrayList<>();
         expect.add(new Integer(4));
         expect.add(new Integer(6));
         expect.add(new Integer(0));
-        List actual = new MyLinkedList(expect);
+        List actual = new MyArrayList(expect);
         Assert.assertEquals(expect.size(),actual.size());
 
         for (int i = 0; i < actual.size();i++) {
@@ -30,11 +26,11 @@ public class MyLinkedListTest {
     public void size() throws Exception {
 
         int expect = 0;
-        int actual = new MyLinkedList().size();
+        int actual = new MyArrayList().size();
         Assert.assertEquals(expect,actual);
 
         expect = 2;
-        List list =  new MyLinkedList();
+        List list =  new MyArrayList();
         Object object = new Object();
         list.add(object);
         list.add(new Object());
@@ -50,9 +46,9 @@ public class MyLinkedListTest {
     @org.junit.Test
     public void isEmpty() throws Exception {
 
-        Assert.assertTrue(new MyLinkedList().isEmpty());
+        Assert.assertTrue(new MyArrayList().isEmpty());
 
-        List list =  new MyLinkedList();
+        List list =  new MyArrayList();
         Object object = new Object();
         list.add(object);
         Assert.assertFalse(list.isEmpty());
@@ -64,7 +60,7 @@ public class MyLinkedListTest {
     @org.junit.Test
     public void contains() throws Exception {
 
-        List list =  new MyLinkedList();
+        List list =  new MyArrayList();
         Object object = new Object();
         list.add(object);
         list.add(new Object());
@@ -84,8 +80,8 @@ public class MyLinkedListTest {
     @org.junit.Test
     public void iterator() throws Exception {
 
-        List actualList = new MyLinkedList();
-        List expectedList = new LinkedList();
+        List actualList = new MyArrayList();
+        List expectedList = new ArrayList();
         Object object = new Object();
         actualList.add(object);
         expectedList.add(object);
@@ -100,7 +96,7 @@ public class MyLinkedListTest {
             Assert.assertEquals(expectedList.get(i), actualList.get(i));
         }
 
-        actualList = new MyLinkedList(expectedList);
+        actualList = new MyArrayList(expectedList);
         Assert.assertEquals(expectedList.size(), actualList.size());
         for (int i = 0; i < actualList.size() ;i++){
             Assert.assertEquals(expectedList.get(i), actualList.get(i));
@@ -116,7 +112,7 @@ public class MyLinkedListTest {
     @org.junit.Test
     public void toArray() throws Exception {
 
-        List list =  new MyLinkedList();
+        List list =  new MyArrayList();
         Object obj = new Object();
         list.add(new Object());
         list.add(new Object());
@@ -138,7 +134,7 @@ public class MyLinkedListTest {
     @org.junit.Test
     public void add() throws Exception {
 
-        List list =  new MyLinkedList();
+        List list =  new MyArrayList();
         Object object = new Object();
         list.add(new Object());
         list.add(object);
@@ -148,7 +144,7 @@ public class MyLinkedListTest {
     @org.junit.Test
     public void remove() throws Exception {
 
-        List list =  new MyLinkedList();
+        List list =  new MyArrayList();
         Object object = new Object();
         list.add(object);
         list.add(new Object());
@@ -165,10 +161,10 @@ public class MyLinkedListTest {
     @org.junit.Test
     public void addAll() throws Exception {
 
-        List list =  new MyLinkedList();
+        List list =  new MyArrayList();
         Object object = new Object();
         list.add(object);
-        List expected = new LinkedList();
+        List expected = new ArrayList();
         expected.add(new Object());
         expected.add(new Object());
         list.addAll(expected);
@@ -187,10 +183,10 @@ public class MyLinkedListTest {
     @org.junit.Test
     public void addAll1() throws Exception {
 
-        List list =  new MyLinkedList();
+        List list =  new MyArrayList();
         Object object = new Object();
         list.add(object);
-        List expected = new LinkedList();
+        List expected = new ArrayList();
         expected.add(new Object());
         expected.add(new Object());
         Object object2 = new Object();
@@ -210,7 +206,7 @@ public class MyLinkedListTest {
     @org.junit.Test
     public void clear() throws Exception {
 
-        List list =  new MyLinkedList();
+        List list =  new MyArrayList();
         Object object = new Object();
         list.add(object);
         list.add(new Object());
@@ -226,7 +222,7 @@ public class MyLinkedListTest {
     @org.junit.Test
     public void get() throws Exception {
 
-        List list =  new MyLinkedList();
+        List list =  new MyArrayList();
         Object object = new Object();
         list.add(new Object());
         list.add(object);
@@ -246,7 +242,7 @@ public class MyLinkedListTest {
     @org.junit.Test
     public void set() throws Exception {
 
-        List list =  new MyLinkedList();
+        List list =  new MyArrayList();
         Object object = new Object();
         list.add(new Object());
         list.add(object);
@@ -264,7 +260,7 @@ public class MyLinkedListTest {
 
     @org.junit.Test
     public void add1() throws Exception {
-        List list =  new MyLinkedList();
+        List list =  new MyArrayList();
         Object object = new Object();
         list.add(new Object());
         list.add(object);
@@ -282,7 +278,7 @@ public class MyLinkedListTest {
     @org.junit.Test
     public void remove1() throws Exception {
 
-        List list =  new MyLinkedList();
+        List list =  new MyArrayList();
         Object object = new Object();
         list.add(new Object());
         list.add(object);
@@ -308,7 +304,7 @@ public class MyLinkedListTest {
     @org.junit.Test
     public void indexOf() throws Exception {
 
-        List list =  new MyLinkedList();
+        List list =  new MyArrayList();
         Object object = new Object();
         list.add(new Object());
         list.add(object);
@@ -328,7 +324,7 @@ public class MyLinkedListTest {
 
     @org.junit.Test
     public void lastIndexOf() throws Exception {
-        List list = new MyLinkedList();
+        List list = new MyArrayList();
         Object object = new Object();
         list.add(object);
         list.add(new Object());
@@ -348,12 +344,12 @@ public class MyLinkedListTest {
 
     @org.junit.Test
     public void listIterator() throws Exception {
-        List expect = new LinkedList();
+        List expect = new ArrayList();
         expect.add(new Object());
         expect.add(new Object());
         expect.add(new Object());
         expect.add(new Object());
-        List actual = new MyLinkedList(expect);
+        List actual = new MyArrayList(expect);
         ListIterator expectIterator = expect.listIterator();
         ListIterator actualIterator = actual.listIterator();
 
@@ -368,12 +364,12 @@ public class MyLinkedListTest {
 
     @org.junit.Test
     public void listIterator1() throws Exception {
-        List expect = new LinkedList();
+        List expect = new ArrayList();
         expect.add(new Object());
         expect.add(new Object());
         expect.add(new Object());
         expect.add(new Object());
-        List actual = new MyLinkedList(expect);
+        List actual = new MyArrayList(expect);
         int index = 2;
         ListIterator expectIterator = expect.listIterator(index);
         ListIterator actualIterator = actual.listIterator(index);
@@ -389,8 +385,8 @@ public class MyLinkedListTest {
 
     @org.junit.Test
     public void subList() throws Exception {
-        List list = new MyLinkedList();
-        List expected = new LinkedList();
+        List list = new MyArrayList();
+        List expected = new ArrayList();
         list.add(new Object());
         int size = 4;
         Object object;
@@ -411,8 +407,8 @@ public class MyLinkedListTest {
 
     @org.junit.Test
     public void retainAll() throws Exception {
-        List list = new MyLinkedList();
-        List expected = new LinkedList();
+        List list = new MyArrayList();
+        List expected = new ArrayList();
         Object object = new Object();
         list.add(object);
         expected.add(object);
@@ -437,7 +433,7 @@ public class MyLinkedListTest {
 
     @org.junit.Test
     public void removeAll() throws Exception {
-        List list = new MyLinkedList();
+        List list = new MyArrayList();
         Object object1 = new Object(), object2 = new Object(), object3 = new Object();
         list.add(new Object());
         list.add(object1);
@@ -446,7 +442,7 @@ public class MyLinkedListTest {
         list.add(new Object());
         list.add(object3);
 
-        List rem = new LinkedList();
+        List rem = new ArrayList();
         rem.add(object1);
         rem.add(object2);
         rem.add(object3);
@@ -462,13 +458,13 @@ public class MyLinkedListTest {
     @org.junit.Test
     public void containsAll() throws Exception {
 
-        List objects = new LinkedList();
+        List objects = new ArrayList();
         Object object1 = new Object();
         objects.add(new Object());
         objects.add(object1);
         objects.add(new Object());
         objects.add(new Object());
-        List list = new MyLinkedList(objects);
+        List list = new MyArrayList(objects);
         Assert.assertTrue(list.containsAll(objects));
 
         list.remove(object1);
@@ -482,7 +478,7 @@ public class MyLinkedListTest {
     public void toArray1() throws Exception {
         int arrayLength = 4;
         Object[] arr = new Object[arrayLength];
-        List list = new MyLinkedList();
+        List list = new MyArrayList();
         list.add(new Object());
         list.add(new Object());
         list.add(new Object());
@@ -508,5 +504,4 @@ public class MyLinkedListTest {
             Assert.assertEquals(list.get(i), actual[i]);
         }
     }
-
 }

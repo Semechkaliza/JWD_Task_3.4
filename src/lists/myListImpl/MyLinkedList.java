@@ -1,22 +1,16 @@
-package main.linkedList;
-
-import main.MyList;
+package lists.myListImpl;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import java.util.ListIterator;
 
-public class MyLinkedList implements MyList {
+public class MyLinkedList extends MyAbstractList {
 
     private class Node{
 
         private Object object;
         private Node next;
         private Node previous;
-
-        public Node() {
-        }
 
         public Node(Object object, Node next, Node previous) {
             this.object = object;
@@ -41,42 +35,16 @@ public class MyLinkedList implements MyList {
     private Node first;
     private Node last;
     private int number;
-    private boolean isEmpty;
 
     public MyLinkedList(){
         first = null;
         last = null;
         number = 0;
-        isEmpty = true;
     }
 
-    public MyLinkedList(List list){
-        for (Object object : list) {
+    public MyLinkedList(Collection collection){
+        for (Object object : collection) {
             add(object);
-        }
-    }
-
-    private void increment() {
-        if(isEmpty) {
-            number++;
-            isEmpty = false;
-        } else {
-            number++;
-        }
-    }
-
-    private void decrement(){
-        number--;
-        if(number == 0){
-            isEmpty = true;
-        }
-    }
-
-    private boolean inBorder(int i){
-        if((i >= 0) && (i < size())){
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -99,38 +67,11 @@ public class MyLinkedList implements MyList {
 
     @Override
     public boolean isEmpty() {
-        return isEmpty;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        if (indexOf(o) == -1) {
+        if(number > 0) {
             return false;
         } else {
             return true;
         }
-    }
-
-    @Override
-    public Iterator iterator() {
-
-        return new Iterator<Object>() {
-            private int counter = 0;
-            @Override
-            public boolean hasNext() {
-                if(counter < number){
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-            @Override
-            public Object next() {
-                Node temp = getNode(counter);
-                counter++;
-                return temp.object;
-            }
-        };
     }
 
     @Override
@@ -153,13 +94,13 @@ public class MyLinkedList implements MyList {
             first = temp;
             last = temp;
         }
-        increment();
+        number++;
         return false;
     }
 
     @Override
     public boolean remove(Object o) {
-        if(isEmpty){
+        if(isEmpty()){
             return false;
         } else {
 
@@ -191,35 +132,9 @@ public class MyLinkedList implements MyList {
                 temp.previous = null;
                 temp.next = null;
 
-                decrement();
+                number--;
                 return true;
             }
-        }
-    }
-
-    @Override
-    public boolean addAll(Collection collection) {
-        if(!collection.isEmpty()) {
-            for (Object o : collection) {
-                add(o);
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean addAll(int i, Collection collection) {
-        if(inBorder(i)) {
-            int temp = i;
-            for (Object object : collection) {
-                add(temp, object);
-                temp++;
-            }
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -268,7 +183,7 @@ public class MyLinkedList implements MyList {
             temp.previous = insert;
             previous.next = insert;
 
-            increment();
+            number++;
         } else {
             throw new IndexOutOfBoundsException();
         }
@@ -300,7 +215,7 @@ public class MyLinkedList implements MyList {
             temp.previous = null;
             temp.next = null;
 
-            decrement();
+            number--;
             return temp;
         } else {
             return null;
@@ -309,7 +224,7 @@ public class MyLinkedList implements MyList {
 
     @Override
     public int indexOf(Object o) {
-        if (!isEmpty) {
+        if (!isEmpty()) {
             Node temp = first;
             for (int counter = 0; temp != null; counter++) {
                 if(temp.equals(o)){
@@ -326,7 +241,7 @@ public class MyLinkedList implements MyList {
 
     @Override
     public int lastIndexOf(Object o) {
-        if (!isEmpty) {
+        if (!isEmpty()) {
             Node temp = last;
             for (int counter = number - 1; temp != null; counter--) {
                 if(temp.equals(o)){
@@ -339,11 +254,6 @@ public class MyLinkedList implements MyList {
         } else {
             return -1;
         }
-    }
-
-    @Override
-    public ListIterator listIterator() {
-        return listIterator(0);
     }
 
     @Override
@@ -409,95 +319,4 @@ public class MyLinkedList implements MyList {
         };
     }
 
-    @Override
-    public List subList(int i, int i1) {
-        if (i<=i1) {
-            if(inBorder(i)&&inBorder(i1)) {
-                List list = new MyLinkedList();
-                for (int j = i ; j < i1;j++) {
-                    list.add(get(j));
-                }
-                return list;
-            } else {
-                throw new IndexOutOfBoundsException();
-            }
-        } else {
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
-    @Override
-    public boolean retainAll(Collection collection) {
-        if(!isEmpty && !collection.isEmpty()){
-            boolean removed = false;
-            for(int i = 0; i < number; i++){
-                if(!collection.contains(get(i))){
-                    remove(i);
-                    removed = true;
-                }
-            }
-            return removed;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean removeAll(Collection collection) {
-        if (!isEmpty) {
-            if(!collection.isEmpty()){
-                boolean find = false;
-                for (Object obj : collection) {
-                    if(remove(obj)){
-                        find = true;
-                    }
-                }
-                return find;
-            } else {
-             return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean containsAll(Collection collection) {
-        if(!isEmpty){
-            if(!collection.isEmpty()){
-                for (Object obj : collection) {
-                    if(indexOf(obj) == -1){
-                        return false;
-                    }
-                }
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public Object[] toArray(Object[] objects) {
-        if(!isEmpty){
-            Object [] temp;
-            if(objects.length >= number){
-                temp = objects;
-            } else {
-                temp = new Object[number];
-            }
-            for(int i = 0 ; i < number; i++){
-                temp[i] = get(i);
-            }
-            if(objects.length > number){
-                temp[number] = null;
-            }
-            return temp;
-        } else {
-            objects[0] = null;
-            return objects;
-        }
-    }
 }
